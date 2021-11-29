@@ -9,12 +9,11 @@ public class ArrayIt implements Iterator<Integer> {
 
     public ArrayIt(int[] data) {
         this.data = data;
-        point = data.length - 1;
     }
 
     @Override
     public boolean hasNext() {
-        return point >= 0;
+        return point < data.length;
     }
 
     @Override
@@ -22,6 +21,6 @@ public class ArrayIt implements Iterator<Integer> {
         if (!hasNext()) {
             throw new NoSuchElementException();
         }
-        return data[point--];
+        return data[point++];
     }
 }
