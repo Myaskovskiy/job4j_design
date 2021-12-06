@@ -1,6 +1,13 @@
 package ru.job4j.inputoutput;
 
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.TemporaryFolder;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
+
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 /**
@@ -10,8 +17,8 @@ import static org.junit.Assert.assertThat;
  * @since 0.1
  */
 public class AnalizyTest {
-    // прочитаем файл лога в котором три диапазона и запишем результат в файл анализа
-    // сверим данные из внутренней коллекции, которая потом пишется в исходящий файл
+    @Rule
+    public TemporaryFolder folder = new TemporaryFolder();
     @Test
     public void whenTreeDiapasons() {
         Analizy analizy = new Analizy();
@@ -21,12 +28,25 @@ public class AnalizyTest {
         assertThat(analizy.getValue().get(1).key, is("11:01:02"));
         assertThat(analizy.getValue().get(1).value, is("11:02:02"));
     }
-    // прочитаем полученный файл анализа unavailable.csv
-    // данные сверим из внутренней колекции в которую записался наш файл
+
     @Test
     public void readFileUnavailableNewCsv() {
         Analizy analizy = new Analizy();
         analizy.unavailable("server.log", "unavailableNew.csv");
+        assertThat(analizy.elements.get(0).key, is("200"));
+        assertThat(analizy.elements.get(0).value, is("10:56:01"));
+    }
+
+    @Test
+    public void dropTarget() throws IOException {
+        File source = folder.newFile("server.log");
+        File target = folder.newFile("unavailableNew.csv");
+        try (PrintWriter out = new PrintWriter(source)) {
+            out.println("200 10:56:01");
+            out.println("500 10:57:01");
+        }
+        Analizy analizy = new Analizy();
+        analizy.unavailable(source.getAbsolutePath(), target.getAbsolutePath());
         assertThat(analizy.elements.get(0).key, is("200"));
         assertThat(analizy.elements.get(0).value, is("10:56:01"));
     }

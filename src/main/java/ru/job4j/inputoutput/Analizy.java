@@ -1,12 +1,13 @@
 package ru.job4j.inputoutput;
+
 import java.io.*;
 import java.util.*;
+
 public class Analizy {
       private String line;
       List<Element> elements = new ArrayList<>();
-    String startVal = "null";
-    String finishVal = "null";
-    // объект для хранения строчки с разбитием на ключ - значение
+      String startVal = "null";
+      String finishVal = "null";
     class Element {
         String key;
         String value;
@@ -37,11 +38,12 @@ public class Analizy {
             return Objects.hash(key, value);
         }
     }
-     public void makeList(String line) {
+
+    public void makeList(String line) {
         String[] str = line.split(" ");
         Element element = new Element(str[0], str[1]);
         this.elements.add(element);
-     }
+    }
 
     public List<Element> getValue() {
         Iterator<Element> it = this.elements.iterator();
