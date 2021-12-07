@@ -21,6 +21,7 @@ public class AnalizyTest {
     public TemporaryFolder folder = new TemporaryFolder();
     /**
      * 3.0. Тестирование IO [#173905 #236457]
+     * test
      */
     @Test
     public void dropTarget() throws IOException {
