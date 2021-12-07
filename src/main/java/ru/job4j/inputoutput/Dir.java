@@ -1,7 +1,12 @@
 package ru.job4j.inputoutput;
 
 import java.io.File;
-
+/**
+ * Class Dir решение задачи 4.0. File [#252491 #236463]
+ * @author vmyaskovskiy
+ * @version $Id$
+ * @since 0.1
+ */
 public class Dir {
     public static void main(String[] args) {
         File file = new File("c:\\projects");
