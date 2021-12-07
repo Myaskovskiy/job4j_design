@@ -10,7 +10,12 @@ import java.util.List;
 import java.util.function.Predicate;
 
 import static java.nio.file.FileVisitResult.CONTINUE;
-
+/**
+ * Class SearchFiles решение задачи 4.1. Сканирование файловой системы. [#106929 #8827]
+ * @author vmyaskovskiy
+ * @version $Id$
+ * @since 0.1
+ */
 public class SearchFiles implements FileVisitor<Path> {
 
     Predicate<Path> condition;
