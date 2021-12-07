@@ -29,9 +29,6 @@ public class LogFilter {
                 ))) {
 
             log.stream().forEach(out::println);
-        //for (String str: log) {
-            //       out.println(str);
-         //   }
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -1,9 +1,7 @@
 package ru.job4j.list;
 
-
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
-import java.util.List;
 import java.util.NoSuchElementException;
 
 /**
@@ -15,7 +13,6 @@ import java.util.NoSuchElementException;
 public class SimpleLinkedList<E> implements Iterable<E> {
     private int modCount = 0;
     private SimpleLinkedList.Node<E> first;
-
     /**
      * Метод вставляет в начало списка данные.
      */
@@ -28,7 +25,6 @@ public class SimpleLinkedList<E> implements Iterable<E> {
     public int getModCount() {
         return this.modCount;
     }
-
     /**
      * Реализовать метод удаления первого элемент в списке.
      */
@@ -49,7 +45,6 @@ public class SimpleLinkedList<E> implements Iterable<E> {
         }
         return result.data;
     }
-
     /**
      * Класс предназначен для хранения данных.
      */
