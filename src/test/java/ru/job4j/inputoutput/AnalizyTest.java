@@ -36,7 +36,9 @@ public class AnalizyTest {
         assertThat(analizy.elements.get(0).key, is("200"));
         assertThat(analizy.elements.get(0).value, is("10:56:01"));
     }
-
+    /**
+     * 3.0. Тестирование IO [#173905 #236457]
+     */
     @Test
     public void dropTarget() throws IOException {
         File source = folder.newFile("server.log");
