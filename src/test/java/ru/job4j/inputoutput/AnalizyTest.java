@@ -19,23 +19,6 @@ import static org.junit.Assert.assertThat;
 public class AnalizyTest {
     @Rule
     public TemporaryFolder folder = new TemporaryFolder();
-    @Test
-    public void whenTreeDiapasons() {
-        Analizy analizy = new Analizy();
-        analizy.unavailable("server.log", "unavailable.csv");
-        assertThat(analizy.getValue().get(0).key, is("10:57:01"));
-        assertThat(analizy.getValue().get(0).value, is("10:59:01"));
-        assertThat(analizy.getValue().get(1).key, is("11:01:02"));
-        assertThat(analizy.getValue().get(1).value, is("11:02:02"));
-    }
-
-    @Test
-    public void readFileUnavailableNewCsv() {
-        Analizy analizy = new Analizy();
-        analizy.unavailable("server.log", "unavailableNew.csv");
-        assertThat(analizy.elements.get(0).key, is("200"));
-        assertThat(analizy.elements.get(0).value, is("10:56:01"));
-    }
     /**
      * 3.0. Тестирование IO [#173905 #236457]
      */
