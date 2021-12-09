@@ -16,7 +16,10 @@ public class Search {
     }
 
     public static void main(String[] args) throws IOException {
-        Path test = Paths.get("C:\\projects");
-        search(test, p -> p.toFile().getName().endsWith("js")).forEach(System.out::println);
+        if (args.length == 0 || args.length != 2) {
+            throw new IllegalArgumentException("Root folder is null. Usage java -jar dir.jar ROOT_FOLDER.");
+        }
+        Path test = Paths.get(args[0]);
+        search(test, p -> p.toFile().getName().endsWith(args[1])).forEach(System.out::println);
     }
 }
