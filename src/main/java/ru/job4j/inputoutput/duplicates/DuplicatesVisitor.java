@@ -8,7 +8,9 @@ import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.*;
 import java.util.stream.Collectors;
-
+/**
+ * 4.2. Поиск дубликатов [#315066 #237811]
+ */
 public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
 
     List<FileProperty> list = new ArrayList<>();

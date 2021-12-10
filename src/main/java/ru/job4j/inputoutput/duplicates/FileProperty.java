@@ -1,7 +1,9 @@
 package ru.job4j.inputoutput.duplicates;
 
 import java.util.Objects;
-
+/**
+ * 4.2. Поиск дубликатов [#315066 #237811]
+ */
 public class FileProperty {
 
     private long size;

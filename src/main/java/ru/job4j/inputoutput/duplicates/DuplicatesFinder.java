@@ -7,7 +7,9 @@ import java.nio.file.Paths;
 import java.util.List;
 
 public class DuplicatesFinder {
-
+    /**
+     * 4.2. Поиск дубликатов [#315066 #237811]
+     */
     public static List<FileProperty> searcher(Path path) throws IOException {
         DuplicatesVisitor duplicatesVisitor = new DuplicatesVisitor();
         Files.walkFileTree(path, duplicatesVisitor);
