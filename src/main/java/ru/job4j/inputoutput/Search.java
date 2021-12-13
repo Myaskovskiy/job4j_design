@@ -28,6 +28,6 @@ public class Search {
             throw new IllegalArgumentException(String.format("Not directory %s", file.getAbsoluteFile()));
         }
         Path test = Paths.get(args[0]);
-        search(test, p -> p.toFile().getName().endsWith(args[1])).forEach(System.out::println);
+        search(test, p -> p.toFile().getName().endsWith("." + args[1])).forEach(System.out::println);
     }
 }
