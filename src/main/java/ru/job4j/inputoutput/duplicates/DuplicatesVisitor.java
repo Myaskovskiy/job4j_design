@@ -26,6 +26,14 @@ public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
     public List<FileProperty> getList() {
         Set<FileProperty> set = new HashSet<>();
         List<FileProperty> res = list.stream().filter(e -> !set.add(e)).collect(Collectors.toList());
+        for (FileProperty fs: set) {
+            for (FileProperty fl : res) {
+                if (fs.equals(fl)) {
+                    res.add(fs);
+                    break;
+                }
+            }
+        }
         return res;
     }
 }
