@@ -10,15 +10,15 @@ public class DuplicatesFinder {
     /**
      * 4.2. Поиск дубликатов [#315066 #237811]
      */
-    public static List<FileProperty> searcher(Path path) throws IOException {
+    public static List<Path> searcher(Path path) throws IOException {
         DuplicatesVisitor duplicatesVisitor = new DuplicatesVisitor();
         Files.walkFileTree(path, duplicatesVisitor);
-        return duplicatesVisitor.getList();
+        return duplicatesVisitor.getListPath();
     }
 
     public static void main(String[] args) throws IOException {
         Path test = Paths.get("C:\\projects\\test01");
-        List<FileProperty> list = searcher(test);
+        List<Path> list = searcher(test);
         list.stream().forEach(System.out::println);
     }
 }

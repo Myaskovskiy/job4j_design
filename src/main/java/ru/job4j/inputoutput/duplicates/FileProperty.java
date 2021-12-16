@@ -1,5 +1,6 @@
 package ru.job4j.inputoutput.duplicates;
 
+import java.nio.file.Path;
 import java.util.Objects;
 /**
  * 4.2. Поиск дубликатов [#315066 #237811]
@@ -7,7 +8,6 @@ import java.util.Objects;
 public class FileProperty {
 
     private long size;
-
     private String name;
 
     public FileProperty(long size, String name) {
