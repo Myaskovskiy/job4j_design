@@ -13,16 +13,15 @@ public class ArgsName {
 
     private void parse(String[] args) {
         if (args.length == 0) {
-            throw new IllegalArgumentException("Root folder is null. Usage java -jar dir.jar ROOT_FOLDER.");
+            throw new IllegalArgumentException("не заданы аргументы");
         }
         for (String s: args) {
             String key = s.substring(s.indexOf("-") + 1, s.indexOf("="));
             String value = s.substring(s.indexOf("=") + 1);
             if (key.isEmpty() || value.isEmpty()) {
                 throw new IllegalArgumentException();
-            } else {
+            }
                 this.values.put(key, value);
-                   }
             }
     }
 
