@@ -5,7 +5,7 @@ import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.*;
 /**
- * 4.2. Поиск дубликатов [#315066 #237811]
+ * 4.2. Поиск дубликатов [#315066 #237811]new
  */
 public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
 
