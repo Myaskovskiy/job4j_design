@@ -43,7 +43,7 @@ public class CSVReader {
             }
             List<String> resOutNew = new ArrayList<>();
             for (ListString l: listStrings) {
-                    String str = new String();
+                    String str = "";
                     for (int i: lInt) {
                         if (str.isEmpty()) {
                             str = l.getList().get(i);
@@ -77,10 +77,5 @@ public class CSVReader {
                 e.printStackTrace();
             }
         }
-    }
-
-    public static void main(String[] args) throws Exception {
-        ArgsName argsName = ArgsName.of(args);
-        CSVReader.handle(argsName);
     }
 }
