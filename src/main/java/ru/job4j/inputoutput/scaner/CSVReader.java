@@ -65,14 +65,22 @@ public class CSVReader {
             }
             strOut = strOut + System.lineSeparator();
         }
-
-        try (PrintWriter out = new PrintWriter(
-                new BufferedOutputStream(
-                        new FileOutputStream(argsName.get("out"))
-                ))) {
-            out.print(strOut);
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (argsName.get("out").equals("stdout")) {
+            System.out.println(strOut);
+        } else {
+            try (PrintWriter out = new PrintWriter(
+                    new BufferedOutputStream(
+                            new FileOutputStream(argsName.get("out"))
+                    ))) {
+                out.print(strOut);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
+    }
+
+    public static void main(String[] args) throws Exception {
+        ArgsName argsName = ArgsName.of(args);
+        CSVReader.handle(argsName);
     }
 }
