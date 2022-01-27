@@ -12,7 +12,6 @@ public class MainCar {
         final Gson gson = new GsonBuilder().create();
         System.out.println(gson.toJson(car));
 
-
         /* Модифицируем json-строку */
         final String carJson =
                 "{"
