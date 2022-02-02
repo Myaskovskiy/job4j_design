@@ -1,11 +1,18 @@
 package ru.job4j.serialization;
 
-import java.io.Serializable;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
 
-public class Card implements Serializable {
-    private static final long serialVersionUID = 1L;
-    private final String model;
-    private final String color;
+@XmlRootElement(name = "contact")
+
+public class Card  {
+
+    @XmlAttribute
+    private String model;
+    @XmlAttribute
+    private String color;
+
+    public Card() { }
 
     public Card(String model, String color) {
         this.model = model;
