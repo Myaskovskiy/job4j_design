@@ -38,22 +38,4 @@ public class Car {
                 + ", offices=" + Arrays.toString(offices)
                 + '}';
     }
-
-    public static void main(String[] args) throws JAXBException {
-
-        final Car car = new Car(true, 100500, new Card("BMW", "Green"),
-                new String[] {"Moscow", "Tula"});
-
-        JAXBContext context = JAXBContext.newInstance(Car.class);
-        Marshaller marshaller = context.createMarshaller();
-        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-
-        try (StringWriter writer = new StringWriter()) {
-            marshaller.marshal(car, writer);
-            String result = writer.getBuffer().toString();
-            System.out.println(result);
-        } catch (Exception e) {
-
-        }
-    }
 }
