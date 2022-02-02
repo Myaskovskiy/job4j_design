@@ -9,7 +9,6 @@ import java.util.Arrays;
 
 @XmlRootElement(name = "car")
 @XmlAccessorType(XmlAccessType.FIELD)
-
 public class Car {
     @XmlAttribute
     private boolean newCar;
