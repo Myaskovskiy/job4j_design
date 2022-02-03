@@ -1,10 +1,6 @@
 package ru.job4j.serialization;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
 import javax.xml.bind.annotation.*;
-import java.io.StringWriter;
 import java.util.Arrays;
 
 @XmlRootElement(name = "car")
@@ -27,6 +23,22 @@ public class Car {
         this.cost = cost;
         this.card = card;
         this.offices = offices;
+    }
+
+    public boolean isNewCar() {
+        return newCar;
+    }
+
+    public int getCost() {
+        return cost;
+    }
+
+    public Card getCard() {
+        return card;
+    }
+
+    public String[] getOffices() {
+        return offices;
     }
 
     @Override
