@@ -13,7 +13,8 @@ create table emploers(
 insert into departments(name) values
 ('departments 1'),
 ('departments 2'),
-('departments 3');
+('departments 3'),
+('departments 4');
 
 insert into emploers(name, emploers_id) values
 ('Emploers 1', 1),
@@ -25,6 +26,7 @@ insert into emploers(name, emploers_id) values
 
 
 select * from   emploers e left join departments d on d.id = e.emploers_id;
+select * from   departments d left join emploers e on d.id = e.emploers_id;
 select * from   emploers e right join departments d on d.id = e.emploers_id;
 select * from   emploers e full join departments d on d.id = e.emploers_id;
 select * from emploers e cross join departments d;
@@ -51,7 +53,9 @@ insert into teens(name, gender) values
 ('Sasha', 'man'),
 ('Olya', 'woman');
 
-select e.name, d.name from teens e cross join teens d;
+select e.name, d.name from teens e cross join teens d
+where e.gender <> d.gender
+order by e.name;
 
 drop table emploers;
 drop table departments;
