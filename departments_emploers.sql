@@ -26,7 +26,8 @@ insert into emploers(name, emploers_id) values
 
 
 select * from   emploers e left join departments d on d.id = e.emploers_id;
-select * from   departments d left join emploers e on d.id = e.emploers_id;
+select * from   departments d left join emploers e on d.id = e.emploers_id
+where e.emploers_id is null;
 select * from   emploers e right join departments d on d.id = e.emploers_id;
 select * from   emploers e full join departments d on d.id = e.emploers_id;
 select * from emploers e cross join departments d;
