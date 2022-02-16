@@ -1,5 +1,6 @@
 package ru.job4j.postgess;
 
+import java.io.FileInputStream;
 import java.sql.*;
 import java.util.Properties;
 import java.util.StringJoiner;
@@ -7,31 +8,29 @@ import java.util.StringJoiner;
 public class TableEditor implements AutoCloseable {
 
     private Connection connection;
+    private Properties properties;
 
-    private String strProp;
 
-    public TableEditor(String strProp) throws Exception {
-        this.strProp = strProp;
+    public TableEditor(Properties properties) throws Exception {
+        this.properties = properties;
         initConnection();
     }
 
     private void initConnection() throws Exception {
-        Config config = new Config(strProp);
-        config.load();
-        Class.forName(config.value("hibernate.connection.driver_class"));
-        String url = config.value("hibernate.connection.url");
-        String login = config.value("hibernate.connection.username");
-        String password = config.value("hibernate.connection.password");
+        Class.forName(properties.getProperty("hibernate.connection.driver_class"));
+        String url = properties.getProperty("hibernate.connection.url");
+        String login = properties.getProperty("hibernate.connection.username");
+        String password = properties.getProperty("hibernate.connection.password");
         connection = DriverManager.getConnection(url, login, password);
     }
 
-    public void createSql(String sql) throws Exception {
-        try (Connection connection = this.connection) {
+    public void createSql(Connection connection, String sql) throws Exception {
             try (Statement statement = connection.createStatement()) {
                 statement.execute(sql);
+                if (!sql.contains("drop table")) {
                 System.out.println(getTableScheme(connection, "demo_table"));
+                }
             }
-        }
     }
 
     public void createTable(String tableName) throws Exception {
@@ -40,32 +39,28 @@ public class TableEditor implements AutoCloseable {
                         "id serial primary key",
                         "name text"
                 );
-        createSql(sql);
+        createSql(connection, sql);
     }
 
     public void dropTable(String tableName) throws Exception {
-        try (Connection connection = this.connection) {
-            try (Statement statement = connection.createStatement()) {
                 String sql = String.format(
                         "drop table if exists " +  tableName + ";"
                 );
-                statement.execute(sql);
-            }
-        }
+        createSql(connection, sql);
     }
 
     public void addColumn(String tableName, String columnName, String type) throws Exception {
         String sql = String.format(
                 "alter table if exists " +  tableName + " add " + columnName + " " + type + " null;"
         );
-        createSql(sql);
+        createSql(connection, sql);
     }
 
     public void dropColumn(String tableName, String columnName) throws Exception {
         String sql = String.format(
                 "alter table if exists " +  tableName + " drop column " + columnName + " ;"
         );
-        createSql(sql);
+        createSql(connection, sql);
     }
 
     public void renameColumn(String tableName, String columnName, String newColumnName) throws Exception {
@@ -74,7 +69,7 @@ public class TableEditor implements AutoCloseable {
                         + " rename column " + columnName
                         + " to " + newColumnName + " ;"
         );
-        createSql(sql);
+        createSql(connection, sql);
     }
 
     public static String getTableScheme(Connection connection, String tableName) throws Exception {
@@ -104,19 +99,16 @@ public class TableEditor implements AutoCloseable {
     }
 
     public static void main(String[] args) throws Exception {
-        TableEditor tableEditor = new TableEditor("./data/app.properties");
-        tableEditor.createTable("demo_table");
-
-        TableEditor tableEditor2 = new TableEditor("./data/app.properties");
-        tableEditor2.addColumn("demo_table", "price", "integer");
-
-        TableEditor tableEditor3 = new TableEditor("./data/app.properties");
-        tableEditor3.renameColumn("demo_table", "price", "priceNew");
-
-        TableEditor tableEditor4 = new TableEditor("./data/app.properties");
-        tableEditor4.dropColumn("demo_table", "priceNew");
-
-        TableEditor tableEditor5 = new TableEditor("./data/app.properties");
-        tableEditor5.dropTable("demo_table");
+        Properties properties = new Properties();
+        try (FileInputStream in = new FileInputStream("./data/app.properties")) {
+            properties.load(in);
+        }
+        try (TableEditor tableEditor = new TableEditor(properties)) {
+            tableEditor.createTable("demo_table");
+            tableEditor.addColumn("demo_table", "price", "integer");
+            tableEditor.renameColumn("demo_table", "price", "priceNew");
+            tableEditor.dropColumn("demo_table", "priceNew");
+            tableEditor.dropTable("demo_table");
+        }
     }
 }
