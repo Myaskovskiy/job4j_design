@@ -26,8 +26,12 @@ public class ImportDB {
         try (BufferedReader rd = new BufferedReader(new FileReader(dump))) {
             while ((this.line = rd.readLine()) != null) {
                 String[] str = line.split(";");
-                User user = new User(str[0], str[1]);
-                users.add(user);
+                if (str.length < 2 || str.length == 0) {
+                    throw new IllegalArgumentException("arguments are null or < 2");
+                } else {
+                    User user = new User(str[0], str[1]);
+                    users.add(user);
+                }
             }
         }
         return users;
